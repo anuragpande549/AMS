@@ -91,6 +91,22 @@ app.use('/api/v1/overtime', overtimeRouter);
 app.use('/api/v1/reports', reportRouter);
 app.use('/api/v1/settings', settingsRouter);
 
+// Also mount directly under root (for frontends calling /auth/login without /api/v1)
+app.use('/auth', authRouter);
+app.use('/users', userRouter);
+app.use('/attendance', attendanceRouter);
+app.use('/overtime', overtimeRouter);
+app.use('/reports', reportRouter);
+app.use('/settings', settingsRouter);
+
+// Also mount under /api prefix
+app.use('/api/auth', authRouter);
+app.use('/api/users', userRouter);
+app.use('/api/attendance', attendanceRouter);
+app.use('/api/overtime', overtimeRouter);
+app.use('/api/reports', reportRouter);
+app.use('/api/settings', settingsRouter);
+
 // 404 handler for unknown routes
 app.use('*', (req, res) => {
   res.status(404).json({
