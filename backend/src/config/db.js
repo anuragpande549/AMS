@@ -2,43 +2,46 @@ import mongoose from 'mongoose';
 import { env } from './env.js';
 import { logger } from './logger.js';
 
-let isConnected = false;
+let isConnecting = false;
 
 export const connectDB = async () => {
-  if (isConnected) {
-    logger.info('Mongoose is already connected');
-    return;
+  // If connection is already open (readyState 1), reuse it
+  if (mongoose.connection.readyState === 1) {
+    return mongoose.connection;
+  }
+
+  // If a connection attempt is currently in progress, wait for it
+  if (isConnecting) {
+    while (isConnecting && mongoose.connection.readyState !== 1) {
+      await new Promise((r) => setTimeout(r, 100));
+    }
+    return mongoose.connection;
   }
 
   try {
+    isConnecting = true;
     const conn = await mongoose.connect(env.MONGO_URI, {
-      serverSelectionTimeoutMS: 5000
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000
     });
 
-    isConnected = conn.connection.readyState === 1;
     logger.info(`MongoDB Connected: ${conn.connection.host}/${conn.connection.name}`);
-
-    mongoose.connection.on('error', (err) => {
-      logger.error('MongoDB connection error:', err);
-    });
-
-    mongoose.connection.on('disconnected', () => {
-      logger.warn('MongoDB disconnected. Attempting reconnection...');
-      isConnected = false;
-    });
+    return conn.connection;
   } catch (error) {
     logger.error(`MongoDB Initial Connection Error: ${error.message}`);
-    // Do not crash hard immediately in dev so user has time to configure MONGO_URI
-    if (env.NODE_ENV === 'production') {
+    // Only exit in standalone node servers, never in serverless functions (e.g. Vercel)
+    if (!process.env.VERCEL && !process.env.AWS_LAMBDA_FUNCTION_NAME && env.NODE_ENV === 'production') {
       process.exit(1);
     }
+    throw error;
+  } finally {
+    isConnecting = false;
   }
 };
 
 export const closeDB = async () => {
-  if (isConnected) {
+  if (mongoose.connection.readyState !== 0) {
     await mongoose.connection.close();
     logger.info('MongoDB connection closed gracefully');
-    isConnected = false;
   }
 };

@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import { env } from './config/env.js';
+import { connectDB } from './config/db.js';
 import { httpLogger } from './middlewares/httpLogger.js';
 import { errorHandler } from './middlewares/error.middleware.js';
 
@@ -18,10 +19,23 @@ const app = express();
 // Security headers
 app.use(helmet());
 
-// CORS configuration
+// Dynamic CORS configuration (supports localhost, configured CLIENT_URL, and Vercel domains)
 app.use(
   cors({
-    origin: [env.CLIENT_URL, 'http://localhost:5173', 'http://127.0.0.1:5173'],
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps, curl, or serverless test calls)
+      if (!origin) return callback(null, true);
+
+      if (
+        origin === env.CLIENT_URL ||
+        origin.includes('localhost') ||
+        origin.includes('127.0.0.1') ||
+        origin.endsWith('.vercel.app')
+      ) {
+        return callback(null, true);
+      }
+      return callback(null, true);
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
@@ -32,10 +46,30 @@ app.use(
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 
+// Ensure database connection in serverless environments (e.g. Vercel / AWS Lambda)
+app.use(async (_req, _res, next) => {
+  try {
+    await connectDB();
+  } catch (err) {
+    // Error logged inside connectDB
+  }
+  next();
+});
+
 // Request logging through Winston
 app.use(httpLogger);
 
-// Health check endpoint
+// Root & Health check endpoints
+app.get('/', (_req, res) => {
+  res.status(200).json({
+    name: 'AMS Enterprise Attendance API',
+    status: 'online',
+    version: '1.0.0',
+    documentation: 'See README.md for endpoint specifications',
+    health: '/health'
+  });
+});
+
 app.get('/health', (_req, res) => {
   res.status(200).json({
     status: 'ok',
