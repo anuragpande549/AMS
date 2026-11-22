@@ -16,8 +16,13 @@ import settingsRouter from './modules/settings/settings.routes.js';
 
 const app = express();
 
-// Security headers
-app.use(helmet());
+// Security headers with cross-origin policy enabled
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+    crossOriginOpenerPolicy: { policy: 'unsafe-none' }
+  })
+);
 
 // Dynamic CORS configuration (supports localhost, configured CLIENT_URL, and Vercel domains)
 app.use(
@@ -85,22 +90,6 @@ app.use('/api/v1/attendance', attendanceRouter);
 app.use('/api/v1/overtime', overtimeRouter);
 app.use('/api/v1/reports', reportRouter);
 app.use('/api/v1/settings', settingsRouter);
-
-// Also mount under /api prefix for versatility
-app.use('/api/auth', authRouter);
-app.use('/api/users', userRouter);
-app.use('/api/attendance', attendanceRouter);
-app.use('/api/overtime', overtimeRouter);
-app.use('/api/reports', reportRouter);
-app.use('/api/settings', settingsRouter);
-
-// Also mount directly under root (handles cases where VITE_API_BASE_URL in Vercel omits /api/v1)
-app.use('/auth', authRouter);
-app.use('/users', userRouter);
-app.use('/attendance', attendanceRouter);
-app.use('/overtime', overtimeRouter);
-app.use('/reports', reportRouter);
-app.use('/settings', settingsRouter);
 
 // 404 handler for unknown routes
 app.use('*', (req, res) => {
