@@ -95,6 +95,32 @@ Every task and requirement from the assessment specification has been completed 
 
 ---
 
+## 📸 System Visual Tour & Screenshots
+
+The screenshots below showcase the core workflows, real-time telemetry, and administrative controls implemented in the system:
+
+### 1. Attendance Command Center & Operational Telemetry
+> Executive dashboard featuring real-time KPI metric cards, active shift timeline, live selfie thumbnails, and supervisor action alerts.
+![Attendance Command Center](./docs/screenshots/01_attendance_command_center.jpg)
+
+### 2. Live WebRTC Facial Verification & GPS Telemetry Check
+> Secure WebRTC live camera punch-in modal (`getUserMedia` to canvas/blob with zero file inputs) capturing real-time GPS coordinates prior to shift confirmation.
+![Live WebRTC Punch Modal](./docs/screenshots/02_live_webrtc_punch_modal.png)
+
+### 3. Employee Directory & Account Approval Lifecycle
+> System-wide administration portal showing active employees, account approval queue (`Pending Approval` / `Active` / `Rejected`), role elevation, and supervisor hierarchy.
+![Employee Directory & Roles](./docs/screenshots/03_employee_directory_roles.png)
+
+### 4. Daily Attendance Reports & Multi-Format Exporters
+> Comprehensive shift audit trail filterable by date range and status, featuring dual 1-click **Export CSV / Excel** and **Export PDF** buttons.
+![Daily Attendance & Audit Reports](./docs/screenshots/04_daily_attendance_reports.png)
+
+### 5. Office Geofence & Location Settings with Live Simulator
+> Administrative control panel at `/settings` for configuring default office latitude, longitude, and radius, complete with 1-click device GPS auto-detection and an interactive Haversine distance test simulator.
+![Office Geofence & Location Settings](./docs/screenshots/05_office_geofence_settings.jpg)
+
+---
+
 ## 🏗️ Architecture & Layer Boundaries
 
 The application strictly implements a **modular, layered clean architecture** with zero leaky abstractions:
@@ -145,17 +171,16 @@ NODE_ENV=development
 CLIENT_URL=http://localhost:5173
 
 # MongoDB Connection String
-MONGO_URI=mongodb+srv://anuragpande549_db_user:HGWXnGGAaZxtmzXY@cluster0.yntlahu.mongodb.net/ams_db?retryWrites=true&w=majority
+MONGO_URI=""
 
 # JWT Authentication
 JWT_SECRET=super_secret_jwt_key_attendance_system_2026_change_in_production
 JWT_EXPIRES_IN=7d
 
 # Cloudinary Storage (Configured for live selfie buffer uploads)
-CLOUDINARY_CLOUD_NAME=dx6tne6ap
-CLOUDINARY_API_KEY=627463266542134
-CLOUDINARY_API_SECRET=VPRmOxzo8oxaacpyCev_unBFG84
-
+CLOUDINARY_CLOUD_NAME=""
+CLOUDINARY_API_KEY=""
+CLOUDINARY_API_SECRET=""
 # Default Office Geofence Coordinates
 OFFICE_LATITUDE=28.6139
 OFFICE_LONGITUDE=77.2090
