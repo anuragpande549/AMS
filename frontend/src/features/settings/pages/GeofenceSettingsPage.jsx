@@ -205,9 +205,9 @@ export const GeofenceSettingsPage = () => {
             </div>
 
             {/* Quick Auto-Detect GPS Button */}
-            <div className="flex items-center justify-between p-3 bg-[#F0F9FF] border border-[#BAE6FD] rounded text-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between p-3 bg-[#F0F9FF] border border-[#BAE6FD] rounded text-xs gap-3">
               <div className="flex items-center gap-2 text-[#0369A1]">
-                <Navigation className="w-4 h-4 text-[#0EA5E9]" />
+                <Navigation className="w-4 h-4 text-[#0EA5E9] shrink-0" />
                 <div>
                   <span className="font-semibold text-xs block">Need your current location?</span>
                   <span className="text-[11px] text-[#0284C7]">Acquires GPS fix from your device browser</span>
@@ -217,7 +217,7 @@ export const GeofenceSettingsPage = () => {
                 type="button"
                 onClick={handleUseCurrentLocation}
                 disabled={isLocating}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-[#BAE6FD] text-[#0369A1] hover:bg-[#F0F9FF] rounded font-semibold text-xs shadow-2xs transition-colors cursor-pointer disabled:opacity-50"
+                className="flex items-center justify-center gap-1.5 px-3 py-1.5 bg-white border border-[#BAE6FD] text-[#0369A1] hover:bg-[#F0F9FF] rounded font-semibold text-xs shadow-2xs transition-colors cursor-pointer disabled:opacity-50 w-full sm:w-auto shrink-0"
               >
                 {isLocating ? <Spinner size="sm" color="cobalt" /> : <RefreshCw className="w-3.5 h-3.5" />}
                 <span>{isLocating ? 'Acquiring Fix...' : 'Use My Current GPS'}</span>

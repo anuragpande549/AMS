@@ -36,9 +36,9 @@ export const GeofenceSimulatorCard = ({ officeLat, officeLon, radiusMeters }) =>
 
   return (
     <div className="bg-white border border-[#E2E8F0] rounded-lg p-5 shadow-xs">
-      <div className="flex items-center justify-between pb-3 border-b border-[#E2E8F0] mb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[#E2E8F0] mb-4 gap-2.5">
         <div className="flex items-center gap-2">
-          <Compass className="w-5 h-5 text-[#3B82F6]" />
+          <Compass className="w-5 h-5 text-[#3B82F6] shrink-0" />
           <div>
             <h3 className="text-sm font-bold text-[#1E293B]">Live Geofence Simulator</h3>
             <p className="text-[11px] text-[#64748B]">
@@ -51,7 +51,7 @@ export const GeofenceSimulatorCard = ({ officeLat, officeLon, radiusMeters }) =>
           type="button"
           onClick={handleDetectGPS}
           disabled={isDetecting}
-          className="flex items-center gap-1.5 px-3 py-1.5 bg-[#F0F9FF] border border-[#BAE6FD] text-[#0369A1] hover:bg-[#E0F2FE] rounded text-xs font-semibold transition-colors cursor-pointer disabled:opacity-50"
+          className="flex items-center justify-center gap-1.5 px-3 py-1.5 bg-[#F0F9FF] border border-[#BAE6FD] text-[#0369A1] hover:bg-[#E0F2FE] rounded text-xs font-semibold transition-colors cursor-pointer disabled:opacity-50 w-full sm:w-auto shrink-0"
         >
           {isDetecting ? <Spinner size="sm" color="cobalt" /> : <Navigation className="w-3.5 h-3.5" />}
           <span>{isDetecting ? 'Locating...' : 'Test My Live GPS'}</span>

@@ -254,10 +254,10 @@ export const EmployeeDirectoryPage = () => {
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
           <Link
             to="/settings"
-            className="flex items-center gap-1.5 px-3 py-2 bg-white border border-[#E2E8F0] hover:bg-[#F8FAFC] text-[#1E293B] rounded text-xs font-semibold shadow-2xs transition-colors cursor-pointer"
+            className="flex items-center justify-center gap-1.5 px-3 py-2 bg-white border border-[#E2E8F0] hover:bg-[#F8FAFC] text-[#1E293B] rounded text-xs font-semibold shadow-2xs transition-colors cursor-pointer"
           >
             <MapPin className="w-3.5 h-3.5 text-[#0EA5E9]" />
             <span>Geofence Settings</span>
@@ -266,6 +266,7 @@ export const EmployeeDirectoryPage = () => {
             variant="primary"
             size="md"
             icon={UserPlus}
+            className="w-full sm:w-auto justify-center"
             onClick={() => setIsCreateModalOpen(true)}
           >
             Add New Employee
@@ -276,7 +277,7 @@ export const EmployeeDirectoryPage = () => {
       {/* Tabs & Search Filter Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white p-3 border border-[#E2E8F0] rounded-lg">
         {/* Status Filter Tabs */}
-        <div className="flex items-center gap-1 overflow-x-auto">
+        <div className="flex items-center gap-1 overflow-x-auto pb-1 sm:pb-0 w-full sm:w-auto">
           {[
             { id: 'all', label: 'All Users', count: counts.total },
             { id: 'Approved', label: 'Active Staff', count: counts.approved },
@@ -289,7 +290,7 @@ export const EmployeeDirectoryPage = () => {
                 setStatusFilter(tab.id);
                 setPage(1);
               }}
-              className={`px-3 py-1.5 rounded text-xs font-medium transition-colors cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
+              className={`px-3 py-1.5 rounded text-xs font-medium transition-colors cursor-pointer flex items-center gap-1.5 whitespace-nowrap shrink-0 ${
                 statusFilter === tab.id
                   ? 'bg-[#1E293B] text-white shadow-xs'
                   : 'text-[#64748B] hover:text-[#1E293B] hover:bg-[#F1F5F9]'
@@ -388,7 +389,7 @@ export const EmployeeDirectoryPage = () => {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-[#64748B] mb-1">
                   Access Role
@@ -439,11 +440,11 @@ export const EmployeeDirectoryPage = () => {
               </select>
             </div>
 
-            <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#E2E8F0]">
-              <Button type="button" variant="secondary" size="sm" onClick={() => setIsCreateModalOpen(false)}>
+            <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2 pt-3 border-t border-[#E2E8F0]">
+              <Button type="button" variant="secondary" size="sm" onClick={() => setIsCreateModalOpen(false)} className="w-full sm:w-auto justify-center">
                 Cancel
               </Button>
-              <Button type="submit" variant="primary" size="sm" isLoading={isCreating}>
+              <Button type="submit" variant="primary" size="sm" isLoading={isCreating} className="w-full sm:w-auto justify-center">
                 Create & Activate
               </Button>
             </div>
@@ -476,11 +477,11 @@ export const EmployeeDirectoryPage = () => {
               </select>
             </div>
 
-            <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#E2E8F0]">
-              <Button variant="secondary" size="sm" onClick={() => setRoleModalUser(null)}>
+            <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2 pt-3 border-t border-[#E2E8F0]">
+              <Button variant="secondary" size="sm" onClick={() => setRoleModalUser(null)} className="w-full sm:w-auto justify-center">
                 Cancel
               </Button>
-              <Button variant="primary" size="sm" isLoading={isUpdatingRole} onClick={handleUpdateRole}>
+              <Button variant="primary" size="sm" isLoading={isUpdatingRole} onClick={handleUpdateRole} className="w-full sm:w-auto justify-center">
                 Save Changes
               </Button>
             </div>
@@ -516,8 +517,8 @@ export const EmployeeDirectoryPage = () => {
               </select>
             </div>
 
-            <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#E2E8F0]">
-              <Button variant="secondary" size="sm" onClick={() => setManagerModalUser(null)}>
+            <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2 pt-3 border-t border-[#E2E8F0]">
+              <Button variant="secondary" size="sm" onClick={() => setManagerModalUser(null)} className="w-full sm:w-auto justify-center">
                 Cancel
               </Button>
               <Button
@@ -526,6 +527,7 @@ export const EmployeeDirectoryPage = () => {
                 disabled={!selectedManagerId}
                 isLoading={isAssigningManager}
                 onClick={handleAssignManager}
+                className="w-full sm:w-auto justify-center"
               >
                 Assign
               </Button>

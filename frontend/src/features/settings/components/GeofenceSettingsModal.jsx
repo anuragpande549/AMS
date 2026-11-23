@@ -116,23 +116,23 @@ export const GeofenceSettingsModal = ({ isOpen, onClose }) => {
           </div>
 
           {/* Quick GPS Auto-fill button */}
-          <div className="flex items-center justify-between p-2.5 bg-[#F0F9FF] border border-[#BAE6FD] rounded text-xs">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between p-2.5 bg-[#F0F9FF] border border-[#BAE6FD] rounded text-xs gap-2">
             <div className="flex items-center gap-2 text-[#075985]">
-              <Navigation className="w-4 h-4 text-[#0EA5E9]" />
+              <Navigation className="w-4 h-4 text-[#0EA5E9] shrink-0" />
               <span className="font-medium text-[11px]">Auto-detect coordinates:</span>
             </div>
             <button
               type="button"
               onClick={handleUseCurrentLocation}
               disabled={isLocating}
-              className="flex items-center gap-1 px-2.5 py-1 bg-white border border-[#BAE6FD] text-[#075985] hover:bg-[#F0F9FF] rounded font-semibold text-[11px] shadow-2xs transition-colors cursor-pointer disabled:opacity-50"
+              className="flex items-center justify-center gap-1 px-2.5 py-1 bg-white border border-[#BAE6FD] text-[#075985] hover:bg-[#F0F9FF] rounded font-semibold text-[11px] shadow-2xs transition-colors cursor-pointer disabled:opacity-50 w-full sm:w-auto"
             >
               {isLocating ? <Spinner size="sm" color="cobalt" /> : <RefreshCw className="w-3 h-3" />}
               <span>{isLocating ? 'Acquiring Fix...' : 'Use My Current GPS'}</span>
             </button>
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-semibold uppercase tracking-wider text-[#64748B] mb-1">
                 Office Latitude

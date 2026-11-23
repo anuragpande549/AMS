@@ -129,9 +129,9 @@ export const EmployeeDashboard = () => {
       <div className="space-y-2.5">
         {/* Missed Punch In Alert for Employees */}
         {role === ROLES.EMPLOYEE && !todayData?.hasPunchedIn && !isTodayLoading && (
-          <div className="flex items-center justify-between p-3.5 bg-[#FFFBEB] border border-[#FDE68A] text-[#92400E] rounded-lg text-xs shadow-2xs">
-            <div className="flex items-center gap-2.5">
-              <AlertTriangle className="w-4 h-4 text-[#F59E0B] shrink-0" />
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 bg-[#FFFBEB] border border-[#FDE68A] text-[#92400E] rounded-lg text-xs shadow-2xs gap-2.5">
+            <div className="flex items-start sm:items-center gap-2.5">
+              <AlertTriangle className="w-4 h-4 text-[#F59E0B] shrink-0 mt-0.5 sm:mt-0" />
               <div>
                 <strong className="font-semibold uppercase tracking-wider text-[11px]">Missed Punch Alert:</strong>
                 <span className="ml-1.5 text-xs">
@@ -145,9 +145,9 @@ export const EmployeeDashboard = () => {
         {/* Overtime Approval / Rejection Notification Alert */}
         {role === ROLES.EMPLOYEE &&
           historyData.some((r) => r.overtimeStatus === 'Approved' || r.overtimeStatus === 'Rejected') && (
-            <div className="flex items-center justify-between p-3.5 bg-[#ECFDF5] border border-[#A7F3D0] text-[#065F46] rounded-lg text-xs shadow-2xs">
-              <div className="flex items-center gap-2.5">
-                <CheckCircle className="w-4 h-4 text-[#10B981] shrink-0" />
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 bg-[#ECFDF5] border border-[#A7F3D0] text-[#065F46] rounded-lg text-xs shadow-2xs gap-2.5">
+              <div className="flex items-start sm:items-center gap-2.5">
+                <CheckCircle className="w-4 h-4 text-[#10B981] shrink-0 mt-0.5 sm:mt-0" />
                 <div>
                   <strong className="font-semibold uppercase tracking-wider text-[11px]">Overtime Status Alert:</strong>
                   <span className="ml-1.5 text-xs">
@@ -163,7 +163,7 @@ export const EmployeeDashboard = () => {
                   </span>
                 </div>
               </div>
-              <Link to="/overtime" className="font-semibold text-xs text-[#065F46] underline hover:text-[#047857]">
+              <Link to="/overtime" className="font-semibold text-xs text-[#065F46] underline hover:text-[#047857] shrink-0 self-start sm:self-auto">
                 View Overtime &rarr;
               </Link>
             </div>
@@ -171,9 +171,9 @@ export const EmployeeDashboard = () => {
 
         {/* Manager/Admin Pending Review Alert */}
         {(role === ROLES.MANAGER || role === ROLES.ADMIN) && (kpis?.metrics?.pendingValidations || 0) > 0 && (
-          <div className="flex items-center justify-between p-3.5 bg-[#EFF6FF] border border-[#BFDBFE] text-[#1D4ED8] rounded-lg text-xs shadow-2xs">
-            <div className="flex items-center gap-2.5">
-              <Bell className="w-4 h-4 text-[#3B82F6] shrink-0" />
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 bg-[#EFF6FF] border border-[#BFDBFE] text-[#1D4ED8] rounded-lg text-xs shadow-2xs gap-2.5">
+            <div className="flex items-start sm:items-center gap-2.5">
+              <Bell className="w-4 h-4 text-[#3B82F6] shrink-0 mt-0.5 sm:mt-0" />
               <div>
                 <strong className="font-semibold uppercase tracking-wider text-[11px]">Supervisor Action Alert:</strong>
                 <span className="ml-1.5 text-xs">
@@ -181,7 +181,7 @@ export const EmployeeDashboard = () => {
                 </span>
               </div>
             </div>
-            <Link to="/validation" className="font-semibold text-xs text-[#1D4ED8] underline hover:text-[#1E40AF]">
+            <Link to="/validation" className="font-semibold text-xs text-[#1D4ED8] underline hover:text-[#1E40AF] shrink-0 self-start sm:self-auto">
               Review Queue &rarr;
             </Link>
           </div>

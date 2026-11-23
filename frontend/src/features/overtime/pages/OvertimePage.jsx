@@ -143,7 +143,7 @@ export const OvertimePage = () => {
         </div>
 
         {/* Status Filter Tabs */}
-        <div className="flex items-center bg-white p-1 border border-[#E2E8F0] rounded-lg">
+        <div className="flex items-center bg-white p-1 border border-[#E2E8F0] rounded-lg overflow-x-auto w-full sm:w-auto shrink-0">
           {['Pending', 'Approved', 'Rejected', 'all'].map((status) => (
             <button
               key={status}
@@ -151,9 +151,9 @@ export const OvertimePage = () => {
                 setStatusFilter(status);
                 setPage(1);
               }}
-              className={`px-3 py-1.5 rounded text-xs font-medium transition-colors cursor-pointer capitalize ${
+              className={`px-3 py-1.5 rounded text-xs font-medium transition-colors cursor-pointer capitalize shrink-0 whitespace-nowrap ${
                 statusFilter === status
-                  ? 'bg-[#1E293B] text-white'
+                  ? 'bg-[#1E293B] text-white shadow-xs'
                   : 'text-[#64748B] hover:text-[#1E293B] hover:bg-[#F1F5F9]'
               }`}
             >

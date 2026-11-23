@@ -80,8 +80,15 @@ export const PunchModal = ({ isOpen, onClose, type = 'in' }) => {
         </div>
 
         {/* Modal Actions */}
-        <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#E2E8F0]">
-          <Button type="button" variant="secondary" size="md" onClick={onClose} disabled={isSubmitting}>
+        <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2.5 sm:gap-3 pt-4 border-t border-[#E2E8F0]">
+          <Button
+            type="button"
+            variant="secondary"
+            size="md"
+            onClick={onClose}
+            disabled={isSubmitting}
+            className="w-full sm:w-auto justify-center"
+          >
             Cancel
           </Button>
           <Button
@@ -91,6 +98,7 @@ export const PunchModal = ({ isOpen, onClose, type = 'in' }) => {
             isLoading={isSubmitting}
             disabled={!selfieFile || !coordinates}
             onClick={handleSubmit}
+            className="w-full sm:w-auto justify-center"
           >
             {isPunchIn ? 'Confirm Punch In' : 'Confirm Punch Out'}
           </Button>

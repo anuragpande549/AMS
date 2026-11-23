@@ -34,8 +34,8 @@ export const RemarksModal = ({
           />
         </div>
 
-        <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#E2E8F0]">
-          <Button variant="secondary" size="sm" onClick={onClose} disabled={isLoading}>
+        <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2.5 sm:gap-3 pt-3 border-t border-[#E2E8F0]">
+          <Button variant="secondary" size="sm" onClick={onClose} disabled={isLoading} className="w-full sm:w-auto justify-center">
             Cancel
           </Button>
           <Button
@@ -43,6 +43,7 @@ export const RemarksModal = ({
             size="sm"
             isLoading={isLoading}
             onClick={handleConfirm}
+            className="w-full sm:w-auto justify-center"
           >
             {confirmLabel}
           </Button>

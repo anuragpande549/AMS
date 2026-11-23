@@ -20,13 +20,13 @@ export const TodayPunchCard = ({ todayData, isLoading, refetch }) => {
 
   return (
     <>
-      <div className="bg-white border border-[#E2E8F0] rounded-lg p-6 shadow-[0_1px_3px_0_rgba(15,23,42,0.05)]">
+      <div className="bg-white border border-[#E2E8F0] rounded-lg p-4 sm:p-6 shadow-[0_1px_3px_0_rgba(15,23,42,0.05)]">
         {/* Top Header: Title and Digital Tabular Clock */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-4 border-b border-[#E2E8F0] gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-4 border-b border-[#E2E8F0] gap-2.5">
           <div>
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#10B981] animate-pulse" />
-              <h2 className="text-base font-semibold text-[#1E293B]">Today's Shift Operational Status</h2>
+              <span className="w-2.5 h-2.5 rounded-full bg-[#10B981] animate-pulse shrink-0" />
+              <h2 className="text-sm sm:text-base font-semibold text-[#1E293B]">Today's Shift Operational Status</h2>
             </div>
             <p className="text-xs text-[#64748B] mt-0.5">
               Standard shift compliance duration: 8.0 hours
